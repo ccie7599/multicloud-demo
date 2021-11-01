@@ -3,6 +3,11 @@
     "description": "A Node-RED Project",
     "version": "0.0.1",
     "dependencies": {},
+        "scripts": {
+        "start": "node $NODE_OPTIONS node_modules/node-red/red.js $FLOWS",
+        "debug": "node --inspect=0.0.0.0:9229 $NODE_OPTIONS node_modules/node-red/red.js $FLOWS",
+        "debug_brk": "node --inspect=0.0.0.0:9229 --inspect-brk $NODE_OPTIONS node_modules/node-red/red.js $FLOWS"
+    },
     "node-red": {
         "settings": {
             "flowFile": "flows.json",
