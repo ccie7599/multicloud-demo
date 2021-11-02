@@ -2,7 +2,9 @@
     "name": "node-red-meeseeks-perf",
     "description": "A Node-RED Project",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "node-red": "2.1.3"
+    },
         "scripts": {
         "start": "node $NODE_OPTIONS node_modules/node-red/red.js $FLOWS",
         "debug": "node --inspect=0.0.0.0:9229 $NODE_OPTIONS node_modules/node-red/red.js $FLOWS",
