@@ -12,7 +12,7 @@ RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
 COPY --chown=node-red settings.js /data/settings.js
 COPY flows_cred.json /data/flows_cred.json
 COPY flows.json /data/flows.json
-COPY jwtscript /data/jwtscript
+COPY --chown=node-red jwtscript /data/jwtscript
 ENTRYPOINT /data/jwtscript
 
 
