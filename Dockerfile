@@ -9,7 +9,11 @@ RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
 # NOTE: This will only work if you DO NOT later mount /data as an external volume.
 #       If you need to use an external volume for persistence then
 #       copy your settings and flows files to that volume instead.
+RUN date +%s >> clientid.txt 
+RUN export clientid=$(more clientid.txt);curl https://iec-node-red.go.akamai-access.com/signing?clientID=$clientid >> jwt.txt;
 COPY --chown=node-red settings.js /data/settings.js
+RUN export clientid=$(more clientid.txt);sed -i "s/putclientidhere/$clientid/g" /data/settings.js
+RUN export jwt=$(more jwt.txt);sed -i "s/putjwthere/$jwt/g" /data/settings.js
 COPY flows_cred.json /data/flows_cred.json
 COPY flows.json /data/flows.json
 
