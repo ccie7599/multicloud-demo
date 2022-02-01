@@ -38,6 +38,30 @@
         "info": ""
     },
     {
+        "id": "401333b789844503",
+        "type": "tab",
+        "label": "webserver",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e42fc4013df7b4d5",
+        "type": "tab",
+        "label": "dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0bc909638714814e",
+        "type": "tab",
+        "label": "mqtt broker",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "3c9fafa.7dd6a5",
         "type": "mqtt-broker",
         "name": "",
@@ -260,7 +284,9 @@
         "y": 140,
         "wires": [
             [
-                "6d6e68ee.4521e8"
+                "6d6e68ee.4521e8",
+                "53fadfdcf2708014",
+                "aa72db81.297168"
             ]
         ]
     },
@@ -428,19 +454,20 @@
         "wires": []
     },
     {
-        "id": "b195e5c7.7da298",
-        "type": "json",
+        "id": "9f793fb6.e5e62",
+        "type": "GSheet",
         "z": "5bd5e23aadd26b8d",
-        "name": "convert to JSON",
-        "property": "payload",
+        "creds": "fde17ba4e8f07cec",
+        "method": "append",
         "action": "",
-        "pretty": false,
-        "x": 490,
-        "y": 200,
+        "sheet": "1FJCC7p_rZ7xT8hfc9NGfItQturn0tiPblKlAFc5-qc8",
+        "cells": "Sheet1!A1:A2",
+        "flatten": false,
+        "name": "Write node-RED URL to GSheet",
+        "x": 710,
+        "y": 240,
         "wires": [
-            [
-                "9f793fb6.e5e62"
-            ]
+            []
         ]
     },
     {
@@ -452,32 +479,31 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "[[\"http://{{payload.ip}}:1880\",\"{{clientid}}\"]]",
+        "template": "http://{{payload}}:1880",
         "output": "str",
         "x": 710,
         "y": 160,
         "wires": [
             [
-                "b195e5c7.7da298"
+                "9f793fb6.e5e62"
             ]
         ]
     },
     {
-        "id": "9f793fb6.e5e62",
-        "type": "GSheet",
+        "id": "53fadfdcf2708014",
+        "type": "debug",
         "z": "5bd5e23aadd26b8d",
-        "creds": "fde17ba4e8f07cec",
-        "method": "append",
-        "action": "",
-        "sheet": "1FJCC7p_rZ7xT8hfc9NGfItQturn0tiPblKlAFc5-qc8",
-        "cells": "Sheet1!A1:A2",
-        "flatten": false,
-        "name": "Write node-RED URL to GSheet",
-        "x": 730,
-        "y": 200,
-        "wires": [
-            []
-        ]
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 160,
+        "wires": []
     },
     {
         "id": "f26ca21.902e66",
@@ -673,7 +699,7 @@
         "type": "debug",
         "z": "6b2035a9.ca9f5c",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -758,7 +784,7 @@
         "type": "mqtt in",
         "z": "d3c4c932fa0ad433",
         "name": "Listen on Control Topic ",
-        "topic": "demo/docker/control",
+        "topic": "demo/security/control",
         "qos": "2",
         "datatype": "json",
         "broker": "3c9fafa.7dd6a5",
@@ -799,7 +825,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 180,
+        "x": 560,
         "y": 160,
         "wires": [
             [
@@ -853,7 +879,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 160,
+        "x": 560,
         "y": 280,
         "wires": [
             [
@@ -1048,7 +1074,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"clientid\":\"all\",\"type\":\"exec\",\"exec\":\"ping -c 1 www.yahoo.com\"}",
+        "payload": "{\"clientid\":\"all\",\"type\":\"exec\",\"exec\":\"curl http://127.0.0.1:1880/webserver\"}",
         "payloadType": "json",
         "x": 100,
         "y": 60,
@@ -1627,5 +1653,90 @@
                 "9fbe4e67.e66fe"
             ]
         ]
+    },
+    {
+        "id": "d951a21b122eca14",
+        "type": "http in",
+        "z": "401333b789844503",
+        "name": "",
+        "url": "/webserver",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "f429b80a7e7b202f",
+                "2deb4aa3caf0cc7d"
+            ]
+        ]
+    },
+    {
+        "id": "f429b80a7e7b202f",
+        "type": "http response",
+        "z": "401333b789844503",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2deb4aa3caf0cc7d",
+        "type": "mqtt out",
+        "z": "401333b789844503",
+        "name": "",
+        "topic": "demo/security/webserver/hits",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 530,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8dea14f59b136983",
+        "type": "mqtt in",
+        "z": "e42fc4013df7b4d5",
+        "name": "",
+        "topic": "demo/security/webserver/hits",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 200,
+        "wires": [
+            [
+                "1dd452bb39461eb1"
+            ]
+        ]
+    },
+    {
+        "id": "1dd452bb39461eb1",
+        "type": "debug",
+        "z": "e42fc4013df7b4d5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 220,
+        "wires": []
     }
 ]
