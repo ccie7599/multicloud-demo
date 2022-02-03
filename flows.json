@@ -31,13 +31,6 @@
         "info": ""
     },
     {
-        "id": "6c88dec3.540d9",
-        "type": "tab",
-        "label": "bot",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "401333b789844503",
         "type": "tab",
         "label": "webserver",
@@ -62,6 +55,14 @@
         "env": []
     },
     {
+        "id": "f51fc5811b06d1db",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "3c9fafa.7dd6a5",
         "type": "mqtt-broker",
         "name": "",
@@ -75,17 +76,17 @@
         "protocolVersion": "4",
         "keepalive": "60",
         "cleansession": true,
-        "birthTopic": "demo/docker/clientstate/connect",
+        "birthTopic": "demo/security/clientstate/connect",
         "birthQos": "0",
         "birthRetain": "false",
         "birthPayload": "$(CLIENTID)",
         "birthMsg": {},
-        "closeTopic": "demo/docker/clientstate/close",
+        "closeTopic": "demo/security/clientstate/close",
         "closeQos": "0",
         "closeRetain": "false",
         "closePayload": "$(CLIENTID)",
         "closeMsg": {},
-        "willTopic": "demo/docker/clientstate/lastwill",
+        "willTopic": "demo/security/clientstate/lastwill",
         "willQos": "0",
         "willRetain": "false",
         "willPayload": "$(CLIENTID)",
@@ -140,12 +141,13 @@
     {
         "id": "6d919544.7af97c",
         "type": "ui_group",
-        "name": "OTA Update Demo",
+        "name": "Security Masters Demo",
         "tab": "c7809b33.ca4548",
         "order": 1,
         "disp": true,
-        "width": 14,
-        "collapse": false
+        "width": "14",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "cb978cdcbb341010",
@@ -265,6 +267,24 @@
         "id": "fde17ba4e8f07cec",
         "type": "gauth",
         "name": "node-red@fluted-sentry-260301.iam.gserviceaccount.com"
+    },
+    {
+        "id": "90a75f67.3dfdd",
+        "type": "ui_group",
+        "name": "Client State Table",
+        "tab": "c24691b2.7093d",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "c24691b2.7093d",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
     },
     {
         "id": "2280f0fe.38e8e",
@@ -509,15 +529,23 @@
         "id": "f26ca21.902e66",
         "type": "inject",
         "z": "6b2035a9.ca9f5c",
-        "name": "Inject every second",
-        "repeat": "1",
+        "name": "Inject every 10 seconds",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
         "payloadType": "date",
-        "x": 160,
+        "x": 170,
         "y": 200,
         "wires": [
             [
@@ -546,7 +574,7 @@
         "type": "mqtt out",
         "z": "6b2035a9.ca9f5c",
         "name": "publish to EdgeConnect",
-        "topic": "demo/latency/docker/publish",
+        "topic": "demo/security/latency/publish",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -564,7 +592,7 @@
         "type": "mqtt in",
         "z": "6b2035a9.ca9f5c",
         "name": "Listen for Publish Messages",
-        "topic": "demo/latency/docker/publish",
+        "topic": "demo/security/latency/publish",
         "qos": "2",
         "datatype": "json",
         "broker": "3c9fafa.7dd6a5",
@@ -671,7 +699,7 @@
         "type": "mqtt out",
         "z": "6b2035a9.ca9f5c",
         "name": "publish results to Edge Connect",
-        "topic": "demo/latency/docker/results",
+        "topic": "demo/security/latency/results",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -709,55 +737,6 @@
         "wires": []
     },
     {
-        "id": "4c7b9b6.13cc064",
-        "type": "fs-file-lister",
-        "z": "6b2035a9.ca9f5c",
-        "name": "Build List of Active Clients",
-        "start": "/home/ubuntu/clientstate",
-        "pattern": "vehicle*",
-        "folders": "*",
-        "hidden": false,
-        "lstype": "files",
-        "path": false,
-        "single": false,
-        "depth": 0,
-        "stat": false,
-        "showWarnings": false,
-        "x": 500,
-        "y": 380,
-        "wires": [
-            [
-                "c65d3dd7.0b3cb"
-            ]
-        ]
-    },
-    {
-        "id": "a3e918dc.fa2fe8",
-        "type": "ui_button",
-        "z": "6b2035a9.ca9f5c",
-        "name": "",
-        "group": "6d919544.7af97c",
-        "order": 8,
-        "width": 8,
-        "height": 1,
-        "passthru": false,
-        "label": "Refresh Client State",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 160,
-        "y": 420,
-        "wires": [
-            [
-                "4c7b9b6.13cc064"
-            ]
-        ]
-    },
-    {
         "id": "ddfb9cd3.80f71",
         "type": "ui_list",
         "z": "6b2035a9.ca9f5c",
@@ -774,9 +753,7 @@
         "x": 150,
         "y": 660,
         "wires": [
-            [
-                "d5c7e4cc.057b48"
-            ]
+            []
         ]
     },
     {
@@ -792,8 +769,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
-        "y": 100,
+        "x": 160,
+        "y": 160,
         "wires": [
             [
                 "5872a3052b7c12d6"
@@ -965,7 +942,7 @@
         "type": "mqtt out",
         "z": "d3c4c932fa0ad433",
         "name": "",
-        "topic": "demo/docker/control/response",
+        "topic": "demo/security/control/response",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -993,7 +970,7 @@
             },
             {
                 "t": "set",
-                "p": "payload.exec",
+                "p": "payload.command",
                 "pt": "msg",
                 "to": "exec",
                 "tot": "msg"
@@ -1048,7 +1025,7 @@
         "type": "debug",
         "z": "d3c4c932fa0ad433",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1094,7 +1071,7 @@
                 "t": "set",
                 "p": "exec",
                 "pt": "msg",
-                "to": "payload.exec",
+                "to": "payload.command",
                 "tot": "msg"
             }
         ],
@@ -1156,8 +1133,8 @@
         "syntax": "mustache",
         "template": "{\"result\":\"{{payload}}\"}",
         "output": "json",
-        "x": 360,
-        "y": 640,
+        "x": 460,
+        "y": 660,
         "wires": [
             [
                 "5b13ee680a0ab3a6"
@@ -1204,7 +1181,7 @@
         "type": "mqtt in",
         "z": "a033ecf7.19ef2",
         "name": "Listen for Connect Messages",
-        "topic": "demo/security/state/connected",
+        "topic": "demo/security/clientstate/connected",
         "qos": "2",
         "datatype": "auto",
         "broker": "3c9fafa.7dd6a5",
@@ -1227,7 +1204,7 @@
         "name": "Write Client State File",
         "filename": "",
         "appendNewline": true,
-        "createDir": false,
+        "createDir": true,
         "overwriteFile": "false",
         "encoding": "none",
         "x": 860,
@@ -1245,7 +1222,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "/home/ubuntu/clientstate/{{payload}}",
+        "template": "/data/clientstate/{{payload}}",
         "output": "str",
         "x": 470,
         "y": 160,
@@ -1260,7 +1237,7 @@
         "type": "mqtt in",
         "z": "a033ecf7.19ef2",
         "name": "Listen for Close Messages",
-        "topic": "demo/security/state/closed",
+        "topic": "demo/security/clientstate/closed",
         "qos": "2",
         "datatype": "auto",
         "broker": "3c9fafa.7dd6a5",
@@ -1285,7 +1262,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "/home/ubuntu/clientstate/{{payload}}",
+        "template": "/data/clientstate/{{payload}}",
         "output": "str",
         "x": 470,
         "y": 220,
@@ -1300,7 +1277,7 @@
         "type": "mqtt in",
         "z": "a033ecf7.19ef2",
         "name": "Listen for lwt Messages",
-        "topic": "demo/security/state/lwt",
+        "topic": "demo/security/clientstate/lwt",
         "qos": "2",
         "datatype": "auto",
         "broker": "3c9fafa.7dd6a5",
@@ -1340,7 +1317,7 @@
         "name": "Track LWT messages (Disconnect Monitor)",
         "filename": "",
         "appendNewline": true,
-        "createDir": false,
+        "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
         "x": 930,
@@ -1358,7 +1335,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "/home/ubuntu/disconnects/{{payload}}",
+        "template": "/data/disconnects/{{payload}}",
         "output": "str",
         "x": 470,
         "y": 280,
@@ -1494,7 +1471,7 @@
         "y": 600,
         "wires": [
             [
-                "ddfb9cd3.80f71"
+                "b1206115.740c"
             ]
         ]
     },
@@ -1535,122 +1512,73 @@
         "wires": []
     },
     {
-        "id": "a604d4b5.6bcf58",
-        "type": "mqtt in",
-        "z": "6c88dec3.540d9",
-        "name": "listen for bot commands via MQTT",
-        "topic": "demo/security/command",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "3c9fafa.7dd6a5",
-        "nl": false,
-        "rap": false,
-        "inputs": 0,
+        "id": "dc200233.9958a",
+        "type": "fs-file-lister",
+        "z": "a033ecf7.19ef2",
+        "name": "Build List of Active Clients",
+        "start": "/data/clientstate",
+        "pattern": "vehicle*",
+        "folders": "*",
+        "hidden": false,
+        "lstype": "files",
+        "path": false,
+        "single": false,
+        "depth": 0,
+        "stat": false,
+        "showWarnings": false,
         "x": 180,
-        "y": 200,
+        "y": 500,
         "wires": [
             [
-                "9fbe4e67.e66fe"
+                "c65d3dd7.0b3cb"
             ]
         ]
     },
     {
-        "id": "9fbe4e67.e66fe",
-        "type": "exec",
-        "z": "6c88dec3.540d9",
-        "command": "",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "true",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 570,
-        "y": 300,
-        "wires": [
-            [
-                "71a741a5.ed8e3"
-            ],
-            [
-                "71a741a5.ed8e3"
-            ],
-            [
-                "71a741a5.ed8e3"
-            ]
-        ]
-    },
-    {
-        "id": "bf6eeca7.1657f",
-        "type": "inject",
-        "z": "6c88dec3.540d9",
-        "name": "ping test",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
+        "id": "b1206115.740c",
+        "type": "ui_list",
+        "z": "a033ecf7.19ef2",
+        "group": "8b1f0ad9.213428",
+        "name": "Client State Table",
+        "order": 1,
+        "width": 6,
+        "height": 14,
+        "lineType": "two",
+        "actionType": "click",
+        "allowHTML": false,
+        "outputs": 1,
         "topic": "",
-        "payload": "ping www.akamai.com",
+        "x": 150,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "14b4631ffc53e91e",
+        "type": "ui_button",
+        "z": "a033ecf7.19ef2",
+        "name": "Refresh Client State",
+        "group": "6d919544.7af97c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh Client State",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
         "payloadType": "str",
-        "x": 260,
-        "y": 320,
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 170,
+        "y": 460,
         "wires": [
             [
-                "9fbe4e67.e66fe"
-            ]
-        ]
-    },
-    {
-        "id": "71a741a5.ed8e3",
-        "type": "debug",
-        "z": "6c88dec3.540d9",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 760,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "4673a11c.96ce8",
-        "type": "inject",
-        "z": "6c88dec3.540d9",
-        "name": "",
-        "props": [
-            {
-                "p": "kill",
-                "v": "",
-                "vt": "str"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 250,
-        "y": 400,
-        "wires": [
-            [
-                "9fbe4e67.e66fe"
+                "dc200233.9958a"
             ]
         ]
     },
@@ -1737,6 +1665,159 @@
         "statusType": "auto",
         "x": 660,
         "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5bed910161c16d32",
+        "type": "ui_form",
+        "z": "f51fc5811b06d1db",
+        "name": "",
+        "label": "",
+        "group": "6d919544.7af97c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "ClientID",
+                "value": "clientid",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "command",
+                "value": "command",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "type",
+                "value": "type",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "clientid": "",
+            "command": "",
+            "type": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "481d9e2ddf779b90",
+                "7572d3cf23634844"
+            ]
+        ]
+    },
+    {
+        "id": "481d9e2ddf779b90",
+        "type": "debug",
+        "z": "f51fc5811b06d1db",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b3534f9cb61d9b4c",
+        "type": "mqtt out",
+        "z": "f51fc5811b06d1db",
+        "name": "",
+        "topic": "demo/security/control",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 520,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7572d3cf23634844",
+        "type": "json",
+        "z": "f51fc5811b06d1db",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "b3534f9cb61d9b4c",
+                "481d9e2ddf779b90"
+            ]
+        ]
+    },
+    {
+        "id": "93972954cd76e53d",
+        "type": "mqtt in",
+        "z": "f51fc5811b06d1db",
+        "name": "",
+        "topic": "demo/security/webserver/hits",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "33400ea77704797e"
+            ]
+        ]
+    },
+    {
+        "id": "33400ea77704797e",
+        "type": "ui_gauge",
+        "z": "f51fc5811b06d1db",
+        "name": "",
+        "group": "6d919544.7af97c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Webserver hits",
+        "label": "hits",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 490,
+        "y": 120,
         "wires": []
     }
 ]
