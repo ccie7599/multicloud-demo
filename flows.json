@@ -108,19 +108,6 @@
         "alpnprotocol": ""
     },
     {
-        "id": "33d9c3ab.7a850c",
-        "type": "tls-config",
-        "name": "demo.mqtttest.com",
-        "cert": "",
-        "key": "",
-        "ca": "",
-        "certname": "",
-        "keyname": "",
-        "caname": "",
-        "servername": "demo.mqtttest.com",
-        "verifyservercert": true
-    },
-    {
         "id": "c7809b33.ca4548",
         "type": "ui_tab",
         "name": "Home",
@@ -237,51 +224,9 @@
         }
     },
     {
-        "id": "5a6e49fe.3bec18",
-        "type": "tls-config",
-        "name": "demo-na.mqtttest.com",
-        "cert": "",
-        "key": "",
-        "ca": "",
-        "certname": "",
-        "keyname": "",
-        "caname": "",
-        "servername": "demo-na.mqtttest.com",
-        "verifyservercert": true
-    },
-    {
-        "id": "4d2004dd.4b9bac",
-        "type": "gauth"
-    },
-    {
         "id": "fde17ba4e8f07cec",
         "type": "gauth",
         "name": "node-red@fluted-sentry-260301.iam.gserviceaccount.com"
-    },
-    {
-        "id": "aca27d4c.6ea5a",
-        "type": "mqtt-broker",
-        "name": "",
-        "broker": "demo-na.mqtttest.com",
-        "port": "8883",
-        "tls": "a4089a2e.e45d68",
-        "clientid": "$(CLIENTID)",
-        "usetls": true,
-        "compatmode": false,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "demo/MAAPx/clientstate/connect",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "$(CLIENTID)",
-        "closeTopic": "demo/MAAPx/clientstate/close",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "$(CLIENTID)",
-        "willTopic": "demo/MAAPx/clientstate/lastwill",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "$(CLIENTID)"
     },
     {
         "id": "791e80b3.11014",
@@ -593,7 +538,8 @@
         "y": 280,
         "wires": [
             [
-                "57e94275.f8172c"
+                "57e94275.f8172c",
+                "ca1558fd776c25f6"
             ]
         ]
     },
@@ -707,7 +653,8 @@
         "y": 560,
         "wires": [
             [
-                "e270e69d.557118"
+                "e270e69d.557118",
+                "295f045faac12c46"
             ]
         ]
     },
@@ -754,10 +701,12 @@
         "type": "mqtt in",
         "z": "6b2035a9.ca9f5c",
         "name": "Listen for Results Messages",
-        "topic": "demo/latency/sa/results",
+        "topic": "demo/security/latency/results",
         "qos": "2",
         "datatype": "json",
-        "broker": "aca27d4c.6ea5a",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": false,
         "inputs": 0,
         "x": 200,
         "y": 700,
@@ -856,6 +805,38 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "295f045faac12c46",
+        "type": "debug",
+        "z": "6b2035a9.ca9f5c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "ca1558fd776c25f6",
+        "type": "debug",
+        "z": "6b2035a9.ca9f5c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 300,
+        "wires": []
     },
     {
         "id": "8b729069e4fae062",
