@@ -8,7 +8,9 @@
         "node-red-contrib-google-sheets": "~1.1.2",
         "node-red-dashboard": "~3.1.5",
         "node-red-node-ui-list": "~0.3.6",
-        "node-red-contrib-counter": "~0.1.6"
+        "node-red-contrib-counter": "~0.1.6",
+        "node-red-contrib-merge": "~0.1.1",
+        "node-red-contrib-mqtt-dynamicsub": "0.0.9"
     },
         "scripts": {
         "start": "node $NODE_OPTIONS node_modules/node-red/red.js $FLOWS",
