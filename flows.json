@@ -279,6 +279,76 @@
         "hidden": false
     },
     {
+        "id": "c7a27394.057878",
+        "type": "ui_group",
+        "name": "CHART",
+        "tab": "54e197d8.7f7fe8",
+        "order": 2,
+        "disp": false,
+        "width": "9",
+        "collapse": false
+    },
+    {
+        "id": "54e197d8.7f7fe8",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "21fb4565.85565a",
+        "type": "ui_group",
+        "name": "demo 1",
+        "tab": "a4054538.f69598",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "a4054538.f69598",
+        "type": "ui_tab",
+        "name": "Demo 1:  static",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "62e84868.707968",
+        "type": "ui_tab",
+        "name": "Demo 3: dynamic growing",
+        "icon": "dashboard",
+        "order": 3
+    },
+    {
+        "id": "ed68b86d.026b2",
+        "type": "ui_group",
+        "name": "demo 3",
+        "tab": "62e84868.707968",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "5d771aac.b2fbac",
+        "type": "ui_tab",
+        "name": "Demo 2: dynamic",
+        "icon": "dashboard",
+        "order": 2
+    },
+    {
+        "id": "a1a4b9da.737a38",
+        "type": "ui_group",
+        "name": "demo 2",
+        "tab": "5d771aac.b2fbac",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false
+    },
+    {
         "id": "8eb903068cdd4490",
         "type": "function",
         "z": "01cb79a9af3d1894",
@@ -526,7 +596,7 @@
         "type": "debug",
         "z": "01cb79a9af3d1894",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -543,7 +613,7 @@
         "type": "debug",
         "z": "01cb79a9af3d1894",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -576,7 +646,7 @@
         "type": "debug",
         "z": "01cb79a9af3d1894",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1013,7 +1083,7 @@
         "type": "debug",
         "z": "bbd14540d051fbe4",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1181,12 +1251,11 @@
         "upper": "10",
         "mode": "increment",
         "outputs": "1",
-        "x": 340,
-        "y": 820,
+        "x": 360,
+        "y": 760,
         "wires": [
             [
-                "f47c6393b0f3576c",
-                "fee2a0d641dd4942"
+                "f47c6393b0f3576c"
             ]
         ]
     },
@@ -1208,7 +1277,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 510,
+        "x": 350,
         "y": 800,
         "wires": [
             [
@@ -1216,7 +1285,7 @@
             ],
             [
                 "daa6c91464b1f231",
-                "1e35358401f311e2"
+                "4d8ce0fa72f45cae"
             ]
         ]
     },
@@ -1235,7 +1304,7 @@
         "expiry": "",
         "broker": "3c9fafa.7dd6a5",
         "x": 740,
-        "y": 940,
+        "y": 1020,
         "wires": []
     },
     {
@@ -1264,7 +1333,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 720,
+        "x": 740,
         "y": 760,
         "wires": [
             [
@@ -1304,8 +1373,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 750,
-        "y": 820,
+        "x": 730,
+        "y": 900,
         "wires": []
     },
     {
@@ -1319,8 +1388,8 @@
         "syntax": "mustache",
         "template": "{\"topic\":\"demo/phonepe/traffic/{{count}}\"}",
         "output": "json",
-        "x": 560,
-        "y": 860,
+        "x": 720,
+        "y": 980,
         "wires": [
             [
                 "761b9dfdb4f084e1",
@@ -1342,24 +1411,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 730,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "fee2a0d641dd4942",
-        "type": "debug",
-        "z": "bbd14540d051fbe4",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 490,
-        "y": 740,
+        "y": 940,
         "wires": []
     },
     {
@@ -1407,6 +1459,125 @@
         "x": 1540,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "7df99ea8f39e0f96",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "name": "Reset Job Counter",
+        "props": [
+            {
+                "p": "reset",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 840,
+        "wires": [
+            [
+                "d6525d514d8fa836",
+                "e43a1374b654492e"
+            ]
+        ]
+    },
+    {
+        "id": "e43a1374b654492e",
+        "type": "counter",
+        "z": "bbd14540d051fbe4",
+        "name": "Set # of messages",
+        "init": "1",
+        "step": "1",
+        "lower": "1",
+        "upper": "100",
+        "mode": "increment",
+        "outputs": "1",
+        "x": 430,
+        "y": 900,
+        "wires": [
+            [
+                "4dfcc77d65a3538c"
+            ]
+        ]
+    },
+    {
+        "id": "4dfcc77d65a3538c",
+        "type": "switch",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "property": "countUpperLimitReached",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 940,
+        "wires": [
+            [
+                "bc78f4d2d68701c8"
+            ],
+            [
+                "1e35358401f311e2"
+            ]
+        ]
+    },
+    {
+        "id": "bc78f4d2d68701c8",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "4d8ce0fa72f45cae",
+        "type": "change",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 860,
+        "wires": [
+            [
+                "e43a1374b654492e"
+            ]
+        ]
     },
     {
         "id": "b394fd20d0936582",
@@ -1462,6 +1633,280 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "5eab5b0ea44c6522",
+        "type": "file in",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency",
+        "format": "lines",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 240,
+        "y": 340,
+        "wires": [
+            [
+                "be003cb247b80a96"
+            ]
+        ]
+    },
+    {
+        "id": "be003cb247b80a96",
+        "type": "json",
+        "z": "2525164972c960a3",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "0a9f6009a371f631"
+            ]
+        ]
+    },
+    {
+        "id": "1531fea33a5140a9",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "62a8c3d448b12548",
+        "type": "inject",
+        "z": "2525164972c960a3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "5eab5b0ea44c6522"
+            ]
+        ]
+    },
+    {
+        "id": "0a9f6009a371f631",
+        "type": "function",
+        "z": "2525164972c960a3",
+        "name": "",
+        "func": "for (let i = 0; i < msg.payload.length; i++) {\n    const el = msg.payload[i];\n    const entries = Object.entries(el).map(([topic, payload]) => ({ topic, payload, row: (i+1) }));\n    node.send([entries]);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 400,
+        "wires": [
+            [
+                "6b77abc39b3906df"
+            ]
+        ]
+    },
+    {
+        "id": "6b77abc39b3906df",
+        "type": "switch",
+        "z": "2525164972c960a3",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "payload",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 640,
+        "y": 460,
+        "wires": [
+            [
+                "1531fea33a5140a9",
+                "523f012c60a3935b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "523f012c60a3935b",
+        "type": "template",
+        "z": "2525164972c960a3",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.topic}},{{payload.time}},{{payload.latency}}",
+        "output": "str",
+        "x": 500,
+        "y": 560,
+        "wires": [
+            [
+                "ef4659ecba42a30a",
+                "6caada82f871f489"
+            ]
+        ]
+    },
+    {
+        "id": "ef4659ecba42a30a",
+        "type": "file",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency.csv",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 710,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c465104eb64862e",
+        "type": "http in",
+        "z": "2525164972c960a3",
+        "name": "",
+        "url": "/latency.csv",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 290,
+        "y": 640,
+        "wires": [
+            [
+                "b55ac02f4abe51f1"
+            ]
+        ]
+    },
+    {
+        "id": "b55ac02f4abe51f1",
+        "type": "file in",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 520,
+        "y": 640,
+        "wires": [
+            [
+                "4d6f2e7390ce1a76"
+            ]
+        ]
+    },
+    {
+        "id": "4d6f2e7390ce1a76",
+        "type": "http response",
+        "z": "2525164972c960a3",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 740,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "dbf20b66e5b1b739",
+        "type": "file",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency.csv",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 250,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a92856cb727b787",
+        "type": "inject",
+        "z": "2525164972c960a3",
+        "name": "reset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "dbf20b66e5b1b739"
+            ]
+        ]
+    },
+    {
+        "id": "6caada82f871f489",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 500,
+        "wires": []
     },
     {
         "id": "39c26719233cd5e1",
