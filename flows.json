@@ -634,7 +634,6 @@
         "id": "90713c9e227106e2",
         "type": "mqtt out",
         "z": "01cb79a9af3d1894",
-        "d": true,
         "name": "publish results to Edge Connect",
         "topic": "demo/phonepe/latency/results",
         "qos": "1",
