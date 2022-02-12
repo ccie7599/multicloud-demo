@@ -1,27 +1,2966 @@
-{
-    "name": "node-red-meeseeks-perf",
-    "description": "A Node-RED Project",
-    "version": "0.0.1",
-    "dependencies": {
-        "node-red": "2.1.3",
-        "node-red-contrib-fs": "~1.4.1",
-        "node-red-contrib-google-sheets": "~1.1.2",
-        "node-red-dashboard": "~3.1.5",
-        "node-red-node-ui-list": "~0.3.6",
-        "node-red-contrib-counter": "~0.1.6",
-        "node-red-contrib-merge": "~0.1.1",
-        "node-red-contrib-mqtt-dynamicsub": "0.0.9",
-        "node-red-node-random": "~0.4.0"
+[
+    {
+        "id": "01cb79a9af3d1894",
+        "type": "tab",
+        "label": "Publishers/Subscribers",
+        "disabled": false,
+        "info": "",
+        "env": []
     },
-        "scripts": {
-        "start": "node $NODE_OPTIONS node_modules/node-red/red.js $FLOWS",
-        "debug": "node --inspect=0.0.0.0:9229 $NODE_OPTIONS node_modules/node-red/red.js $FLOWS",
-        "debug_brk": "node --inspect=0.0.0.0:9229 --inspect-brk $NODE_OPTIONS node_modules/node-red/red.js $FLOWS"
+    {
+        "id": "054880b0f8c9fca3",
+        "type": "tab",
+        "label": "Command/Control",
+        "disabled": false,
+        "info": "",
+        "env": []
     },
-    "node-red": {
-        "settings": {
-            "flowFile": "flows.json",
-            "credentialsFile": "flows_cred.json"
+    {
+        "id": "bbd14540d051fbe4",
+        "type": "tab",
+        "label": "dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2525164972c960a3",
+        "type": "tab",
+        "label": "reporting",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9ae080806a38a938",
+        "type": "tab",
+        "label": "Client State",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3c9fafa.7dd6a5",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "demo-in.mqtttest.com",
+        "port": "8883",
+        "tls": "2d748829.2503d8",
+        "clientid": "$(CLIENTID)",
+        "autoConnect": true,
+        "usetls": true,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "demo/phonepe/clientstate/connected",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "$(CLIENTID)",
+        "birthMsg": {},
+        "closeTopic": "demo/phonepe/clientstate/closed",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "$(CLIENTID)",
+        "closeMsg": {},
+        "willTopic": "demo/phonepe/clientstate/lastwill",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "$(CLIENTID)",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "2d748829.2503d8",
+        "type": "tls-config",
+        "name": "demo-na.mqtttest.com",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "demo-in.mqtttest.com",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "c7809b33.ca4548",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "cb978cdcbb341010",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
         }
+    },
+    {
+        "id": "fde17ba4e8f07cec",
+        "type": "gauth",
+        "name": "node-red@fluted-sentry-260301.iam.gserviceaccount.com"
+    },
+    {
+        "id": "a4089a2e.e45d68",
+        "type": "tls-config",
+        "name": "demo-na.mqtttest.com",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "demo-na.mqtttest.com",
+        "verifyservercert": true
+    },
+    {
+        "id": "a06ddef.76e0f2",
+        "type": "ui_tab",
+        "name": "Latency",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "26f4d1165fd20bba",
+        "type": "ui_group",
+        "name": "Security Masters Demo",
+        "tab": "ca67bd7dfaad900f",
+        "order": 1,
+        "disp": true,
+        "width": "20",
+        "collapse": false
+    },
+    {
+        "id": "ca67bd7dfaad900f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "80bef3743ca28f1f",
+        "type": "ui_group",
+        "name": "Security Masters Demo",
+        "tab": "d5759354530745c7",
+        "order": 1,
+        "disp": true,
+        "width": "20",
+        "collapse": false
+    },
+    {
+        "id": "d5759354530745c7",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "54e197d8.7f7fe8",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8eb903068cdd4490",
+        "type": "function",
+        "z": "01cb79a9af3d1894",
+        "name": "Add current epoch timestamp ",
+        "func": "msg.payload.time = Date.now() \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "4cd5b2a6a6db1de6",
+                "f6a90df2484dea0b"
+            ]
+        ]
+    },
+    {
+        "id": "f6a90df2484dea0b",
+        "type": "mqtt out",
+        "z": "01cb79a9af3d1894",
+        "name": "publish to EdgeConnect",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 170,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8c6b470e22d1f096",
+        "type": "function",
+        "z": "01cb79a9af3d1894",
+        "name": "Calculate Time Difference ",
+        "func": "var now = Date.now();\nvar then = msg.payload.time;\nmsg.payload.latency = now - then;\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 150,
+        "y": 560,
+        "wires": [
+            [
+                "8d86d96a62e263a5",
+                "13f38a443f9384df"
+            ]
+        ]
+    },
+    {
+        "id": "691f92abbfadb403",
+        "type": "comment",
+        "z": "01cb79a9af3d1894",
+        "name": "Publisher",
+        "info": "",
+        "x": 100,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "cbeabe15cd736da1",
+        "type": "comment",
+        "z": "01cb79a9af3d1894",
+        "name": "Subscriber",
+        "info": "",
+        "x": 140,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "3c4fcfab994dbbd4",
+        "type": "mqtt in",
+        "z": "01cb79a9af3d1894",
+        "name": "Listen for Subscribe Control Messages",
+        "topic": "demo/phonepe/control/sub",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [
+                "202e15be8b0ca85c",
+                "9f786035fe8d5717"
+            ]
+        ]
+    },
+    {
+        "id": "407386da17353130",
+        "type": "switch",
+        "z": "01cb79a9af3d1894",
+        "name": "Is Unsubscribe?",
+        "property": "payload.unsubscribe",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 120,
+        "y": 420,
+        "wires": [
+            [
+                "067dd92652e4b911"
+            ],
+            [
+                "d1637499b08e37fd"
+            ]
+        ]
+    },
+    {
+        "id": "d1637499b08e37fd",
+        "type": "change",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 120,
+        "y": 460,
+        "wires": [
+            [
+                "462f3d16e1bfe165"
+            ]
+        ]
+    },
+    {
+        "id": "067dd92652e4b911",
+        "type": "change",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "unsubscribe",
+                "pt": "msg",
+                "to": "all",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 420,
+        "wires": [
+            [
+                "462f3d16e1bfe165"
+            ]
+        ]
+    },
+    {
+        "id": "90e84896821d5f17",
+        "type": "mqtt in",
+        "z": "01cb79a9af3d1894",
+        "d": true,
+        "name": "Listen for Publisher Control Messages",
+        "topic": "demo/phonepe/control/pub",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 190,
+        "y": 60,
+        "wires": [
+            [
+                "f0efe4342527fb3e"
+            ]
+        ]
+    },
+    {
+        "id": "f0efe4342527fb3e",
+        "type": "change",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "8eb903068cdd4490"
+            ]
+        ]
+    },
+    {
+        "id": "208c78f192b521ef",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "4cd5b2a6a6db1de6",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0ab95671886a92e5",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "8d86d96a62e263a5",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "462f3d16e1bfe165",
+        "type": "mqtt-in-dynamicsub",
+        "z": "01cb79a9af3d1894",
+        "name": "subscribe to topics",
+        "qos": "2",
+        "datatype": "json",
+        "unsubscribe-after-first-msg-recv": false,
+        "debug-subscribe": true,
+        "broker": "3c9fafa.7dd6a5",
+        "x": 710,
+        "y": 400,
+        "wires": [
+            [
+                "8c6b470e22d1f096",
+                "208c78f192b521ef",
+                "e28108dfc85011f7"
+            ]
+        ]
+    },
+    {
+        "id": "37bd3fb443bf1308",
+        "type": "mqtt in",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "topic": "demo/phonepe/control/results",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 820,
+        "wires": [
+            [
+                "ac48b1534cf70854"
+            ]
+        ]
+    },
+    {
+        "id": "ac48b1534cf70854",
+        "type": "switch",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "send",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "clear",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 820,
+        "wires": [
+            [
+                "d273e065ee735fb9",
+                "8e98d60fbada30fd"
+            ],
+            [
+                "3d3e62d318cc9d26",
+                "7e1139e3c35e3d2f",
+                "e0ee4db115cc8d79"
+            ]
+        ]
+    },
+    {
+        "id": "90713c9e227106e2",
+        "type": "mqtt out",
+        "z": "01cb79a9af3d1894",
+        "name": "publish results to Edge Connect",
+        "topic": "demo/phonepe/latency/results",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 710,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d273e065ee735fb9",
+        "type": "file in",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/result",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 650,
+        "y": 820,
+        "wires": [
+            [
+                "90713c9e227106e2",
+                "c54d1707c85eaea3"
+            ]
+        ]
+    },
+    {
+        "id": "3d3e62d318cc9d26",
+        "type": "file",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/result",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 510,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13f38a443f9384df",
+        "type": "file",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/result",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 450,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e98d60fbada30fd",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "c54d1707c85eaea3",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "7e1139e3c35e3d2f",
+        "type": "file",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/latency",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 820,
+        "y": 960,
+        "wires": [
+            [
+                "e0ee4db115cc8d79"
+            ]
+        ]
+    },
+    {
+        "id": "e0ee4db115cc8d79",
+        "type": "file",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/latency.csv",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 730,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "202e15be8b0ca85c",
+        "type": "switch",
+        "z": "01cb79a9af3d1894",
+        "name": "Is Random",
+        "property": "payload.random",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "c4b23792263da07d",
+                "36f7c0e7d6db46f2"
+            ],
+            [
+                "407386da17353130"
+            ]
+        ]
+    },
+    {
+        "id": "674929aaa276ed6a",
+        "type": "random",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "low": "",
+        "high": "",
+        "inte": "true",
+        "property": "payload",
+        "x": 660,
+        "y": 280,
+        "wires": [
+            [
+                "71e4da8c427c9e36"
+            ]
+        ]
+    },
+    {
+        "id": "c4b23792263da07d",
+        "type": "change",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "from",
+                "pt": "msg",
+                "to": "payload.from",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "to",
+                "pt": "msg",
+                "to": "payload.to",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 320,
+        "wires": [
+            [
+                "674929aaa276ed6a"
+            ]
+        ]
+    },
+    {
+        "id": "71e4da8c427c9e36",
+        "type": "template",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "demo/phonepe/traffic/{{payload}}",
+        "output": "str",
+        "x": 690,
+        "y": 340,
+        "wires": [
+            [
+                "462f3d16e1bfe165",
+                "1f145cbfe29ddabd"
+            ]
+        ]
+    },
+    {
+        "id": "e28108dfc85011f7",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1f145cbfe29ddabd",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "9f786035fe8d5717",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "36f7c0e7d6db46f2",
+        "type": "debug",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "419216f99b1d4f2c",
+        "type": "mqtt in",
+        "z": "054880b0f8c9fca3",
+        "name": "Listen on Control Topic ",
+        "topic": "demo/phonepe/control/cmd",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "e1c51c69e55b80ca",
+                "1ec2b29be23a6fa6"
+            ]
+        ]
+    },
+    {
+        "id": "1ec2b29be23a6fa6",
+        "type": "switch",
+        "z": "054880b0f8c9fca3",
+        "name": "Check if clientid is self or all ",
+        "property": "payload.clientid",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "all",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "CLIENTID",
+                "vt": "env"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "e1c51c69e55b80ca"
+            ],
+            [
+                "e1c51c69e55b80ca"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3e189b18faef82c1",
+        "type": "comment",
+        "z": "054880b0f8c9fca3",
+        "name": "Otherwise Ignore",
+        "info": "",
+        "x": 380,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "030971452fc75bb0",
+        "type": "comment",
+        "z": "054880b0f8c9fca3",
+        "name": "Process",
+        "info": "",
+        "x": 120,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "e1c51c69e55b80ca",
+        "type": "switch",
+        "z": "054880b0f8c9fca3",
+        "name": "Check Command Type",
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "exec",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "api",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 160,
+        "y": 200,
+        "wires": [
+            [
+                "7a05332df0a1c07c"
+            ],
+            [
+                "82bcefd45e81fafe"
+            ]
+        ]
+    },
+    {
+        "id": "c65a51a9bf2619e7",
+        "type": "http request",
+        "z": "054880b0f8c9fca3",
+        "name": "API requests",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 110,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79c25e1c39e2b181",
+        "type": "exec",
+        "z": "054880b0f8c9fca3",
+        "command": "",
+        "addpay": "exec",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "120",
+        "winHide": false,
+        "oldrc": false,
+        "name": "exec commands",
+        "x": 530,
+        "y": 400,
+        "wires": [
+            [
+                "a9c2a44f280a6c8b"
+            ],
+            [
+                "a9c2a44f280a6c8b"
+            ],
+            [
+                "a9c2a44f280a6c8b"
+            ]
+        ]
+    },
+    {
+        "id": "5772665d4f859cb6",
+        "type": "comment",
+        "z": "054880b0f8c9fca3",
+        "name": "node-red API requests",
+        "info": "",
+        "x": 140,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f0724d750e71a407",
+        "type": "comment",
+        "z": "054880b0f8c9fca3",
+        "name": "exec commands",
+        "info": "",
+        "x": 560,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a9c2a44f280a6c8b",
+        "type": "debug",
+        "z": "054880b0f8c9fca3",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "7a05332df0a1c07c",
+        "type": "change",
+        "z": "054880b0f8c9fca3",
+        "name": "Normallze payload for input into exec node ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "exec",
+                "pt": "msg",
+                "to": "payload.command",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 340,
+        "wires": [
+            [
+                "79c25e1c39e2b181"
+            ]
+        ]
+    },
+    {
+        "id": "82bcefd45e81fafe",
+        "type": "change",
+        "z": "054880b0f8c9fca3",
+        "name": "normalize payload for input into http request node",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "payload.url",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "payload.method",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 280,
+        "wires": [
+            [
+                "c65a51a9bf2619e7"
+            ]
+        ]
+    },
+    {
+        "id": "6e3491342844cae1",
+        "type": "counter",
+        "z": "bbd14540d051fbe4",
+        "name": "Set # of Topics",
+        "init": "0",
+        "step": "1",
+        "lower": "1",
+        "upper": "10",
+        "mode": "increment",
+        "outputs": "1",
+        "x": 380,
+        "y": 400,
+        "wires": [
+            [
+                "b2342fbae063fae6",
+                "e93d622ae33ede06"
+            ]
+        ]
+    },
+    {
+        "id": "5a8608dea086a853",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "d": true,
+        "name": "Send Job",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "6e3491342844cae1"
+            ]
+        ]
+    },
+    {
+        "id": "b2342fbae063fae6",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "d41e46e13c2465f7",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "8e6d89736fe18c24",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "name": "Reset Job Counter",
+        "props": [
+            {
+                "p": "reset",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "6e3491342844cae1"
+            ]
+        ]
+    },
+    {
+        "id": "c34cf79592b93d49",
+        "type": "comment",
+        "z": "bbd14540d051fbe4",
+        "name": "Subscriber Jobs",
+        "info": "",
+        "x": 100,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "147aea9eb07fd635",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "name": "Unsubscribe",
+        "props": [
+            {
+                "p": "payload.unsubscribe",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 620,
+        "wires": [
+            [
+                "da7e58d04e676f44"
+            ]
+        ]
+    },
+    {
+        "id": "e93d622ae33ede06",
+        "type": "switch",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "property": "countUpperLimitReached",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 550,
+        "y": 600,
+        "wires": [
+            [],
+            [
+                "669ca909eb620a08"
+            ]
+        ]
+    },
+    {
+        "id": "da7e58d04e676f44",
+        "type": "mqtt out",
+        "z": "bbd14540d051fbe4",
+        "d": true,
+        "name": "",
+        "topic": "demo/phonepe/control/sub",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 720,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "8c74e4082f668aed",
+        "type": "comment",
+        "z": "bbd14540d051fbe4",
+        "name": "Publisher Jobs",
+        "info": "",
+        "x": 160,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "fb10f90773e2a931",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "d": true,
+        "name": "Send Job",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 800,
+        "wires": [
+            [
+                "d6525d514d8fa836"
+            ]
+        ]
+    },
+    {
+        "id": "d6525d514d8fa836",
+        "type": "counter",
+        "z": "bbd14540d051fbe4",
+        "name": "Set # of Topics",
+        "init": "1",
+        "step": "1",
+        "lower": "1",
+        "upper": "10",
+        "mode": "increment",
+        "outputs": "1",
+        "x": 360,
+        "y": 760,
+        "wires": [
+            [
+                "f47c6393b0f3576c"
+            ]
+        ]
+    },
+    {
+        "id": "f47c6393b0f3576c",
+        "type": "switch",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "property": "countUpperLimitReached",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 800,
+        "wires": [
+            [
+                "9ebad48783d1261e"
+            ],
+            [
+                "daa6c91464b1f231",
+                "4d8ce0fa72f45cae"
+            ]
+        ]
+    },
+    {
+        "id": "761b9dfdb4f084e1",
+        "type": "mqtt out",
+        "z": "bbd14540d051fbe4",
+        "d": true,
+        "name": "",
+        "topic": "demo/phonepe/control/pub",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 720,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "9ebad48783d1261e",
+        "type": "change",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "countUpperLimitReached",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 760,
+        "wires": [
+            [
+                "d6525d514d8fa836"
+            ]
+        ]
+    },
+    {
+        "id": "669ca909eb620a08",
+        "type": "template",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"topic\":\"demo/phonepe/traffic/{{count}}\"}",
+        "output": "json",
+        "x": 720,
+        "y": 580,
+        "wires": [
+            [
+                "da7e58d04e676f44",
+                "d41e46e13c2465f7"
+            ]
+        ]
+    },
+    {
+        "id": "daa6c91464b1f231",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "1e35358401f311e2",
+        "type": "template",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"topic\":\"demo/phonepe/traffic/{{topicnumber}}\"}",
+        "output": "json",
+        "x": 620,
+        "y": 980,
+        "wires": [
+            [
+                "761b9dfdb4f084e1",
+                "0ad38aeb0935f508"
+            ]
+        ]
+    },
+    {
+        "id": "0ad38aeb0935f508",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "ae669dbcf6a6d477",
+        "type": "comment",
+        "z": "bbd14540d051fbe4",
+        "name": "Listen for Connect, Close, LWT messages",
+        "info": "",
+        "x": 720,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "3f946a0af3615403",
+        "type": "comment",
+        "z": "bbd14540d051fbe4",
+        "name": "Build Client State Table",
+        "info": "",
+        "x": 420,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "49e3e1e62685f304",
+        "type": "comment",
+        "z": "bbd14540d051fbe4",
+        "name": "Individual Download (Action when user clicks on single state table entry)",
+        "info": "",
+        "x": 1200,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "1e101566c62fbb5c",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7df99ea8f39e0f96",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "name": "Reset Job Counter",
+        "props": [
+            {
+                "p": "reset",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 840,
+        "wires": [
+            [
+                "d6525d514d8fa836",
+                "e43a1374b654492e"
+            ]
+        ]
+    },
+    {
+        "id": "e43a1374b654492e",
+        "type": "counter",
+        "z": "bbd14540d051fbe4",
+        "name": "Set # of messages",
+        "init": "1",
+        "step": "1",
+        "lower": "1",
+        "upper": "100",
+        "mode": "increment",
+        "outputs": "1",
+        "x": 430,
+        "y": 900,
+        "wires": [
+            [
+                "4dfcc77d65a3538c"
+            ]
+        ]
+    },
+    {
+        "id": "4dfcc77d65a3538c",
+        "type": "switch",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "property": "countUpperLimitReached",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 940,
+        "wires": [
+            [
+                "bc78f4d2d68701c8"
+            ],
+            [
+                "1e35358401f311e2"
+            ]
+        ]
+    },
+    {
+        "id": "bc78f4d2d68701c8",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "4d8ce0fa72f45cae",
+        "type": "change",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 820,
+        "wires": [
+            [
+                "a304d62d83020d4f"
+            ]
+        ]
+    },
+    {
+        "id": "a304d62d83020d4f",
+        "type": "change",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topicnumber",
+                "pt": "msg",
+                "to": "count",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 860,
+        "wires": [
+            [
+                "e43a1374b654492e"
+            ]
+        ]
+    },
+    {
+        "id": "85e25bb889cd2a6f",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "name": "Random",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "payload.from",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "p": "payload.to",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "p": "payload.random",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "4c9aa7092ef4c3ee"
+            ]
+        ]
+    },
+    {
+        "id": "4c9aa7092ef4c3ee",
+        "type": "change",
+        "z": "bbd14540d051fbe4",
+        "name": "Set Random, From, and To",
+        "rules": [
+            {
+                "t": "set",
+                "p": "random",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "from",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "to",
+                "pt": "msg",
+                "to": "10",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 320,
+        "wires": [
+            [
+                "2a4ee20f71829aab",
+                "84f90ea5a34a960c"
+            ]
+        ]
+    },
+    {
+        "id": "2a4ee20f71829aab",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "84f90ea5a34a960c",
+        "type": "template",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"from\":{{from}},\"to\":{{to}},\"random\":{{random}}}",
+        "output": "json",
+        "x": 600,
+        "y": 380,
+        "wires": [
+            [
+                "da7e58d04e676f44",
+                "731f90dff6fad902"
+            ]
+        ]
+    },
+    {
+        "id": "731f90dff6fad902",
+        "type": "debug",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b394fd20d0936582",
+        "type": "mqtt in",
+        "z": "2525164972c960a3",
+        "d": true,
+        "name": "",
+        "topic": "demo/phonepe/latency/results",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "16ad8f557f6e0366",
+                "c51dadf18a3ae8e8"
+            ]
+        ]
+    },
+    {
+        "id": "16ad8f557f6e0366",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c51dadf18a3ae8e8",
+        "type": "file",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 450,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5eab5b0ea44c6522",
+        "type": "file in",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "b14f31a2b54717ad",
+                "dc1b07abdbe721f6"
+            ]
+        ]
+    },
+    {
+        "id": "62a8c3d448b12548",
+        "type": "inject",
+        "z": "2525164972c960a3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "5eab5b0ea44c6522"
+            ]
+        ]
+    },
+    {
+        "id": "523f012c60a3935b",
+        "type": "template",
+        "z": "2525164972c960a3",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.topic}},{{payload.time}},{{payload.latency}}",
+        "output": "str",
+        "x": 500,
+        "y": 560,
+        "wires": [
+            [
+                "ef4659ecba42a30a",
+                "6caada82f871f489"
+            ]
+        ]
+    },
+    {
+        "id": "ef4659ecba42a30a",
+        "type": "file",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency.csv",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 710,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c465104eb64862e",
+        "type": "http in",
+        "z": "2525164972c960a3",
+        "d": true,
+        "name": "",
+        "url": "/latency.csv",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 290,
+        "y": 640,
+        "wires": [
+            [
+                "b55ac02f4abe51f1"
+            ]
+        ]
+    },
+    {
+        "id": "b55ac02f4abe51f1",
+        "type": "file in",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 520,
+        "y": 640,
+        "wires": [
+            [
+                "4d6f2e7390ce1a76"
+            ]
+        ]
+    },
+    {
+        "id": "4d6f2e7390ce1a76",
+        "type": "http response",
+        "z": "2525164972c960a3",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 740,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "dbf20b66e5b1b739",
+        "type": "file",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency.csv",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 250,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a92856cb727b787",
+        "type": "inject",
+        "z": "2525164972c960a3",
+        "name": "reset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "dbf20b66e5b1b739"
+            ]
+        ]
+    },
+    {
+        "id": "6caada82f871f489",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d9e8b6eb18ea1fb7",
+        "type": "ui_button",
+        "z": "2525164972c960a3",
+        "name": "Send Results",
+        "group": "80bef3743ca28f1f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Send Results",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "send",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "51924b5ca6418e06"
+            ]
+        ]
+    },
+    {
+        "id": "51924b5ca6418e06",
+        "type": "mqtt out",
+        "z": "2525164972c960a3",
+        "d": true,
+        "name": "",
+        "topic": "demo/phonepe/control/results",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 610,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "9e75cce4d3a09bc5",
+        "type": "ui_button",
+        "z": "2525164972c960a3",
+        "name": "Clear Results",
+        "group": "80bef3743ca28f1f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Clear Results",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "clear",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "51924b5ca6418e06"
+            ]
+        ]
+    },
+    {
+        "id": "bbf2f58be962c492",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b14f31a2b54717ad",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8e6a5c645841ce4d",
+        "type": "json",
+        "z": "2525164972c960a3",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 390,
+        "y": 420,
+        "wires": [
+            [
+                "c8aaf48f8b4b4a6d",
+                "523f012c60a3935b"
+            ]
+        ]
+    },
+    {
+        "id": "dc1b07abdbe721f6",
+        "type": "split",
+        "z": "2525164972c960a3",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": true,
+        "addname": "",
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "8e6a5c645841ce4d",
+                "73cbd8c1c5dacf22"
+            ]
+        ]
+    },
+    {
+        "id": "73cbd8c1c5dacf22",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "c8aaf48f8b4b4a6d",
+        "type": "debug",
+        "z": "2525164972c960a3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "39c26719233cd5e1",
+        "type": "comment",
+        "z": "9ae080806a38a938",
+        "name": "Listen for Connect, Close, LWT messages",
+        "info": "",
+        "x": 230,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "896c6e1fbee590f8",
+        "type": "file",
+        "z": "9ae080806a38a938",
+        "name": "Write Client State File",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 860,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4d348ceac777673c",
+        "type": "template",
+        "z": "9ae080806a38a938",
+        "name": "Set Filename",
+        "field": "filename",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "/data/clientstate/{{payload}}",
+        "output": "str",
+        "x": 470,
+        "y": 160,
+        "wires": [
+            [
+                "896c6e1fbee590f8"
+            ]
+        ]
+    },
+    {
+        "id": "eed7913c0696d033",
+        "type": "mqtt in",
+        "z": "9ae080806a38a938",
+        "d": true,
+        "name": "Listen for Close Messages",
+        "topic": "demo/phonepe/clientstate/closed",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "3a7a91f889b5c7d4",
+                "d30b8a15ec5e982a"
+            ]
+        ]
+    },
+    {
+        "id": "3a7a91f889b5c7d4",
+        "type": "template",
+        "z": "9ae080806a38a938",
+        "name": "Set Filename",
+        "field": "filename",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "/data/clientstate/{{payload}}",
+        "output": "str",
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "2d128b9ee8e9c190"
+            ]
+        ]
+    },
+    {
+        "id": "58dc3faf4f61f85d",
+        "type": "mqtt in",
+        "z": "9ae080806a38a938",
+        "d": true,
+        "name": "Listen for lwt Messages",
+        "topic": "demo/phonepe/clientstate/lastwill",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "3a7a91f889b5c7d4",
+                "d30b8a15ec5e982a"
+            ]
+        ]
+    },
+    {
+        "id": "2d128b9ee8e9c190",
+        "type": "file",
+        "z": "9ae080806a38a938",
+        "name": "Delete Client State File",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 860,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c0e92f47914450c",
+        "type": "template",
+        "z": "9ae080806a38a938",
+        "name": "form JSON of Active Clients",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"title\":\"{{payload}}\",\"description\":\"Connected\",\"icon\":\"https://cdn1.iconfinder.com/data/icons/malware-and-threats/512/Botnet-01-512.png\"}",
+        "output": "json",
+        "x": 180,
+        "y": 540,
+        "wires": [
+            [
+                "4db90fcaf409846c",
+                "48f160a142358d75"
+            ]
+        ]
+    },
+    {
+        "id": "4db90fcaf409846c",
+        "type": "join",
+        "z": "9ae080806a38a938",
+        "name": "Create Single Array of Active Clients",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "2",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 210,
+        "y": 600,
+        "wires": [
+            [
+                "68fc219ea066c0c2",
+                "82842c30cd77cb45",
+                "6e82d65f53f3f5d8"
+            ]
+        ]
+    },
+    {
+        "id": "c67f0795fc09d29d",
+        "type": "comment",
+        "z": "9ae080806a38a938",
+        "name": "Build Client State Table",
+        "info": "",
+        "x": 160,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "c712190eb6fd5342",
+        "type": "comment",
+        "z": "9ae080806a38a938",
+        "name": "Individual Download (Action when user clicks on single state table entry)",
+        "info": "",
+        "x": 260,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "d30b8a15ec5e982a",
+        "type": "debug",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "68fc219ea066c0c2",
+        "type": "ui_list",
+        "z": "9ae080806a38a938",
+        "group": "80bef3743ca28f1f",
+        "name": "Client State Table",
+        "order": 2,
+        "width": 10,
+        "height": 15,
+        "lineType": "two",
+        "actionType": "click",
+        "allowHTML": false,
+        "outputs": 1,
+        "topic": "",
+        "x": 150,
+        "y": 660,
+        "wires": [
+            [
+                "a3d1ef1c6b8fdc02"
+            ]
+        ]
+    },
+    {
+        "id": "eeab9a96fa89244d",
+        "type": "fs-file-lister",
+        "z": "9ae080806a38a938",
+        "name": "Build List of Active Clients",
+        "start": "/data/clientstate",
+        "pattern": "*bot",
+        "folders": "*",
+        "hidden": false,
+        "lstype": "files",
+        "path": false,
+        "single": false,
+        "depth": 0,
+        "stat": false,
+        "showWarnings": false,
+        "x": 180,
+        "y": 500,
+        "wires": [
+            [
+                "8c0e92f47914450c",
+                "c2e7de4f19e688bc"
+            ]
+        ]
+    },
+    {
+        "id": "0067a82c69982697",
+        "type": "mqtt in",
+        "z": "9ae080806a38a938",
+        "d": true,
+        "name": "Listen for Connect Messages",
+        "topic": "demo/phonepe/clientstate/connected",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 180,
+        "y": 160,
+        "wires": [
+            [
+                "4d348ceac777673c",
+                "d30b8a15ec5e982a",
+                "72c25df8f5f2cda3"
+            ]
+        ]
+    },
+    {
+        "id": "c2e7de4f19e688bc",
+        "type": "debug",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "c9c66efae6abf1b3",
+        "type": "debug",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "48f160a142358d75",
+        "type": "debug",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "82842c30cd77cb45",
+        "type": "debug",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "6e82d65f53f3f5d8",
+        "type": "mqtt out",
+        "z": "9ae080806a38a938",
+        "d": true,
+        "name": "",
+        "topic": "demo/phonepe/service/clientstate",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 620,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "a3d1ef1c6b8fdc02",
+        "type": "link out",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "links": [
+            "5a5ff76b.480ea"
+        ],
+        "x": 355,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "44a0da1226c82569",
+        "type": "ui_button",
+        "z": "9ae080806a38a938",
+        "name": "Refresh Player Count",
+        "group": "80bef3743ca28f1f",
+        "order": 5,
+        "width": 10,
+        "height": 1,
+        "passthru": false,
+        "label": "Refresh Player Count",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "1f111a43031c2205",
+                "dddd598760fcb577"
+            ]
+        ]
+    },
+    {
+        "id": "f0c5c3313c581f9e",
+        "type": "mqtt out",
+        "z": "9ae080806a38a938",
+        "d": true,
+        "name": "",
+        "topic": "demo/phonepe/service/clientreport",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 930,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "3dc872db999a6bcd",
+        "type": "delay",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 840,
+        "y": 460,
+        "wires": [
+            [
+                "eeab9a96fa89244d"
+            ]
+        ]
+    },
+    {
+        "id": "d8dad651323a6dce",
+        "type": "debug",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "1f111a43031c2205",
+        "type": "exec",
+        "z": "9ae080806a38a938",
+        "command": "rm /data/clientstate/*",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 580,
+        "y": 400,
+        "wires": [
+            [
+                "f0c5c3313c581f9e",
+                "3dc872db999a6bcd",
+                "d8dad651323a6dce"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c75fb808aa871012",
+        "type": "link in",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "links": [
+            "e408cc94.dd29"
+        ],
+        "x": 775,
+        "y": 580,
+        "wires": [
+            [
+                "f0c5c3313c581f9e"
+            ]
+        ]
+    },
+    {
+        "id": "72c25df8f5f2cda3",
+        "type": "link out",
+        "z": "9ae080806a38a938",
+        "name": "connect messages",
+        "links": [
+            "c0512c98.75a5f8"
+        ],
+        "x": 445,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "dddd598760fcb577",
+        "type": "link out",
+        "z": "9ae080806a38a938",
+        "name": "reset",
+        "links": [
+            "d859d6ff.d4af2"
+        ],
+        "x": 345,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "8922397d95a94d5c",
+        "type": "ui_button",
+        "z": "9ae080806a38a938",
+        "name": "Show List",
+        "group": "80bef3743ca28f1f",
+        "order": 5,
+        "width": 10,
+        "height": 1,
+        "passthru": false,
+        "label": "Show List",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "eeab9a96fa89244d"
+            ]
+        ]
+    },
+    {
+        "id": "fe673887ca2f0335",
+        "type": "mqtt in",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "topic": "demo/phonepe/service/clientreport",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 260,
+        "y": 840,
+        "wires": [
+            [
+                "dd6ada8deb796509"
+            ]
+        ]
+    },
+    {
+        "id": "e9d7a51105e9ec08",
+        "type": "mqtt out",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "topic": "demo/phonepe/clientstate/connected",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 270,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "dd6ada8deb796509",
+        "type": "change",
+        "z": "9ae080806a38a938",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "CLIENTID",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 210,
+        "y": 900,
+        "wires": [
+            [
+                "e9d7a51105e9ec08"
+            ]
+        ]
     }
-}
+]
