@@ -99,17 +99,6 @@
         "hidden": false
     },
     {
-        "id": "6d919544.7af97c",
-        "type": "ui_group",
-        "name": "Security Masters Demo",
-        "tab": "c7809b33.ca4548",
-        "order": 1,
-        "disp": true,
-        "width": "20",
-        "collapse": false,
-        "className": ""
-    },
-    {
         "id": "cb978cdcbb341010",
         "type": "ui_base",
         "theme": {
@@ -212,16 +201,6 @@
         "name": "node-red@fluted-sentry-260301.iam.gserviceaccount.com"
     },
     {
-        "id": "791e80b3.11014",
-        "type": "ui_group",
-        "name": "Latency",
-        "tab": "a06ddef.76e0f2",
-        "order": 1,
-        "disp": false,
-        "width": "18",
-        "collapse": false
-    },
-    {
         "id": "a4089a2e.e45d68",
         "type": "tls-config",
         "name": "demo-na.mqtttest.com",
@@ -279,16 +258,6 @@
         "hidden": false
     },
     {
-        "id": "c7a27394.057878",
-        "type": "ui_group",
-        "name": "CHART",
-        "tab": "54e197d8.7f7fe8",
-        "order": 2,
-        "disp": false,
-        "width": "9",
-        "collapse": false
-    },
-    {
         "id": "54e197d8.7f7fe8",
         "type": "ui_tab",
         "name": "Home",
@@ -296,57 +265,6 @@
         "order": 1,
         "disabled": false,
         "hidden": false
-    },
-    {
-        "id": "21fb4565.85565a",
-        "type": "ui_group",
-        "name": "demo 1",
-        "tab": "a4054538.f69598",
-        "order": 1,
-        "disp": false,
-        "width": "12",
-        "collapse": false
-    },
-    {
-        "id": "a4054538.f69598",
-        "type": "ui_tab",
-        "name": "Demo 1:  static",
-        "icon": "dashboard",
-        "order": 1
-    },
-    {
-        "id": "62e84868.707968",
-        "type": "ui_tab",
-        "name": "Demo 3: dynamic growing",
-        "icon": "dashboard",
-        "order": 3
-    },
-    {
-        "id": "ed68b86d.026b2",
-        "type": "ui_group",
-        "name": "demo 3",
-        "tab": "62e84868.707968",
-        "order": 1,
-        "disp": false,
-        "width": "12",
-        "collapse": false
-    },
-    {
-        "id": "5d771aac.b2fbac",
-        "type": "ui_tab",
-        "name": "Demo 2: dynamic",
-        "icon": "dashboard",
-        "order": 2
-    },
-    {
-        "id": "a1a4b9da.737a38",
-        "type": "ui_group",
-        "name": "demo 2",
-        "tab": "5d771aac.b2fbac",
-        "order": 1,
-        "disp": false,
-        "width": "12",
-        "collapse": false
     },
     {
         "id": "8eb903068cdd4490",
@@ -363,7 +281,6 @@
         "y": 160,
         "wires": [
             [
-                "f6a90df2484dea0b",
                 "4cd5b2a6a6db1de6"
             ]
         ]
@@ -382,8 +299,8 @@
         "correl": "",
         "expiry": "",
         "broker": "3c9fafa.7dd6a5",
-        "x": 150,
-        "y": 200,
+        "x": 190,
+        "y": 240,
         "wires": []
     },
     {
@@ -398,8 +315,8 @@
         "y": 560,
         "wires": [
             [
-                "f02aca399e0033c2",
-                "8d86d96a62e263a5"
+                "8d86d96a62e263a5",
+                "13f38a443f9384df"
             ]
         ]
     },
@@ -411,24 +328,6 @@
         "info": "",
         "x": 100,
         "y": 40,
-        "wires": []
-    },
-    {
-        "id": "14b5d3153db4f1dd",
-        "type": "mqtt out",
-        "z": "01cb79a9af3d1894",
-        "name": "publish results to Edge Connect",
-        "topic": "demo/phonepe/latency/results",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "3c9fafa.7dd6a5",
-        "x": 170,
-        "y": 680,
         "wires": []
     },
     {
@@ -456,9 +355,7 @@
         "x": 190,
         "y": 360,
         "wires": [
-            [
-                "407386da17353130"
-            ]
+            []
         ]
     },
     {
@@ -659,21 +556,6 @@
         "wires": []
     },
     {
-        "id": "f02aca399e0033c2",
-        "type": "merge",
-        "z": "01cb79a9af3d1894",
-        "name": "",
-        "timeout": "30",
-        "x": 90,
-        "y": 620,
-        "wires": [
-            [
-                "14b5d3153db4f1dd",
-                "0ab95671886a92e5"
-            ]
-        ]
-    },
-    {
         "id": "462f3d16e1bfe165",
         "type": "mqtt-in-dynamicsub",
         "z": "01cb79a9af3d1894",
@@ -690,6 +572,129 @@
                 "8c6b470e22d1f096",
                 "208c78f192b521ef"
             ]
+        ]
+    },
+    {
+        "id": "37bd3fb443bf1308",
+        "type": "mqtt in",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "topic": "demo/phonepe/control/results",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3c9fafa.7dd6a5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 820,
+        "wires": [
+            [
+                "ac48b1534cf70854"
+            ]
+        ]
+    },
+    {
+        "id": "ac48b1534cf70854",
+        "type": "switch",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "send",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "clear",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 820,
+        "wires": [
+            [
+                "d273e065ee735fb9"
+            ],
+            [
+                "3d3e62d318cc9d26"
+            ]
+        ]
+    },
+    {
+        "id": "90713c9e227106e2",
+        "type": "mqtt out",
+        "z": "01cb79a9af3d1894",
+        "name": "publish results to Edge Connect",
+        "topic": "demo/phonepe/latency/results",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 710,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d273e065ee735fb9",
+        "type": "file in",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/result",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 650,
+        "y": 820,
+        "wires": [
+            [
+                "90713c9e227106e2"
+            ]
+        ]
+    },
+    {
+        "id": "3d3e62d318cc9d26",
+        "type": "file",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/result",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 680,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13f38a443f9384df",
+        "type": "file",
+        "z": "01cb79a9af3d1894",
+        "name": "",
+        "filename": "/data/result",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 420,
+        "y": 620,
+        "wires": [
+            []
         ]
     },
     {
@@ -1049,7 +1054,7 @@
         ],
         "repeat": "1",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "date",
@@ -1083,7 +1088,7 @@
         "type": "debug",
         "z": "bbd14540d051fbe4",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1215,7 +1220,6 @@
         "id": "fb10f90773e2a931",
         "type": "inject",
         "z": "bbd14540d051fbe4",
-        "d": true,
         "name": "Send Job",
         "props": [
             {
@@ -1228,7 +1232,7 @@
         ],
         "repeat": "1",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "date",
@@ -1303,8 +1307,8 @@
         "correl": "",
         "expiry": "",
         "broker": "3c9fafa.7dd6a5",
-        "x": 740,
-        "y": 1020,
+        "x": 720,
+        "y": 1040,
         "wires": []
     },
     {
@@ -1402,7 +1406,7 @@
         "type": "debug",
         "z": "bbd14540d051fbe4",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1907,6 +1911,80 @@
         "x": 730,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "d9e8b6eb18ea1fb7",
+        "type": "ui_button",
+        "z": "2525164972c960a3",
+        "name": "Send Results",
+        "group": "80bef3743ca28f1f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Send Results",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "send",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "51924b5ca6418e06"
+            ]
+        ]
+    },
+    {
+        "id": "51924b5ca6418e06",
+        "type": "mqtt out",
+        "z": "2525164972c960a3",
+        "name": "",
+        "topic": "demo/phonepe/control/results",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c9fafa.7dd6a5",
+        "x": 530,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "9e75cce4d3a09bc5",
+        "type": "ui_button",
+        "z": "2525164972c960a3",
+        "name": "Clear Results",
+        "group": "80bef3743ca28f1f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Clear Results",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "clear",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "51924b5ca6418e06"
+            ]
+        ]
     },
     {
         "id": "39c26719233cd5e1",
