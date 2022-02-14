@@ -51,7 +51,7 @@
         "compatmode": false,
         "protocolVersion": "4",
         "keepalive": "60",
-        "cleansession": true,
+        "cleansession": false,
         "birthTopic": "demo/phonepe/clientstate/connected",
         "birthQos": "0",
         "birthRetain": "false",
@@ -72,7 +72,7 @@
     {
         "id": "2d748829.2503d8",
         "type": "tls-config",
-        "name": "demo-na.mqtttest.com",
+        "name": "demo-in.mqtttest.com",
         "cert": "",
         "key": "",
         "ca": "",
@@ -293,7 +293,7 @@
         "correl": "",
         "expiry": "",
         "broker": "3c9fafa.7dd6a5",
-        "x": 170,
+        "x": 210,
         "y": 220,
         "wires": []
     },
@@ -310,7 +310,7 @@
         "wires": [
             [
                 "8d86d96a62e263a5",
-                "13f38a443f9384df"
+                "fe28db5f01c49dc2"
             ]
         ]
     },
@@ -523,6 +523,7 @@
         "id": "462f3d16e1bfe165",
         "type": "mqtt-in-dynamicsub",
         "z": "01cb79a9af3d1894",
+        "d": true,
         "name": "subscribe to topics",
         "qos": "2",
         "datatype": "json",
@@ -659,7 +660,7 @@
         "createDir": true,
         "overwriteFile": "false",
         "encoding": "none",
-        "x": 450,
+        "x": 570,
         "y": 660,
         "wires": [
             []
@@ -911,12 +912,14 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "This is the payload: {{payload}} !",
+        "template": "{{payload.time}},{{payload.latency}}",
         "output": "str",
-        "x": 430,
+        "x": 440,
         "y": 600,
         "wires": [
-            []
+            [
+                "13f38a443f9384df"
+            ]
         ]
     },
     {
@@ -2187,6 +2190,7 @@
         "id": "b5b9b7a33679ee8e",
         "type": "inject",
         "z": "bbd14540d051fbe4",
+        "d": true,
         "name": "Random",
         "props": [
             {
@@ -2208,9 +2212,9 @@
                 "vt": "bool"
             }
         ],
-        "repeat": "",
+        "repeat": ".1",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "date",
@@ -2218,7 +2222,7 @@
         "y": 960,
         "wires": [
             [
-                "263f7aa2ecd3439f"
+                "176883bdb4915081"
             ]
         ]
     },
@@ -2239,7 +2243,7 @@
                 "t": "set",
                 "p": "to",
                 "pt": "msg",
-                "to": "1000",
+                "to": "772",
                 "tot": "num"
             }
         ],
@@ -2248,8 +2252,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 260,
-        "y": 1140,
+        "x": 440,
+        "y": 1180,
         "wires": [
             [
                 "647ad71c5728b8b8"
@@ -2267,8 +2271,8 @@
         "syntax": "mustache",
         "template": "{\"from\":{{from}},\"to\":{{to}}}",
         "output": "json",
-        "x": 220,
-        "y": 1040,
+        "x": 180,
+        "y": 1020,
         "wires": [
             [
                 "259d8c8bc9bbe3d9"
@@ -2399,7 +2403,7 @@
         "init": "1",
         "step": "1",
         "lower": "1",
-        "upper": "1000",
+        "upper": "3001",
         "mode": "increment",
         "outputs": "1",
         "x": 390,
@@ -2443,7 +2447,7 @@
         "type": "debug",
         "z": "bbd14540d051fbe4",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2454,6 +2458,161 @@
         "x": 670,
         "y": 1140,
         "wires": []
+    },
+    {
+        "id": "9736ac50c5a09b9a",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "name": "start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "payload.from",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "p": "payload.to",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "p": "start",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1160,
+        "wires": [
+            [
+                "f7b631ccfe19644b"
+            ]
+        ]
+    },
+    {
+        "id": "176883bdb4915081",
+        "type": "switch",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "property": "start",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 1100,
+        "wires": [
+            [
+                "263f7aa2ecd3439f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "640e64fa86758b1a",
+        "type": "inject",
+        "z": "bbd14540d051fbe4",
+        "name": "stop",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "payload.from",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "p": "payload.to",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "p": "start",
+                "v": "false",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1200,
+        "wires": [
+            [
+                "2422cdce7bacba14"
+            ]
+        ]
+    },
+    {
+        "id": "f7b631ccfe19644b",
+        "type": "change",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "start",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2422cdce7bacba14",
+        "type": "change",
+        "z": "bbd14540d051fbe4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "start",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 1200,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "b394fd20d0936582",
@@ -2483,7 +2642,7 @@
         "type": "debug",
         "z": "2525164972c960a3",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2523,7 +2682,7 @@
         "encoding": "none",
         "allProps": false,
         "x": 170,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "b14f31a2b54717ad",
@@ -2883,6 +3042,53 @@
         "x": 930,
         "y": 320,
         "wires": []
+    },
+    {
+        "id": "9421b2cc9fb813e4",
+        "type": "http response",
+        "z": "2525164972c960a3",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "025bb0f678d9cd65",
+        "type": "file in",
+        "z": "2525164972c960a3",
+        "name": "",
+        "filename": "/data/latency",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 470,
+        "y": 800,
+        "wires": [
+            [
+                "9421b2cc9fb813e4"
+            ]
+        ]
+    },
+    {
+        "id": "b1bd1698f54c353c",
+        "type": "http in",
+        "z": "2525164972c960a3",
+        "name": "",
+        "url": "/latency",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 800,
+        "wires": [
+            [
+                "025bb0f678d9cd65"
+            ]
+        ]
     },
     {
         "id": "39c26719233cd5e1",
