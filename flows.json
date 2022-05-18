@@ -1,6 +1,6 @@
 [
     {
-        "id": "2a306cb3a45f454c",
+        "id": "a3fd93de4e7ae70e",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
@@ -229,9 +229,9 @@
         "hidden": false
     },
     {
-        "id": "6847f60bc5257dfd",
+        "id": "d554eade73674c15",
         "type": "http in",
-        "z": "2a306cb3a45f454c",
+        "z": "a3fd93de4e7ae70e",
         "name": "Location Service endpoint /location",
         "url": "/location",
         "method": "get",
@@ -241,33 +241,275 @@
         "y": 80,
         "wires": [
             [
-                "b778dc41142a2396"
+                "cd6d3646f1351786"
             ]
         ]
     },
     {
-        "id": "b778dc41142a2396",
+        "id": "fc28f4f1929d20d5",
         "type": "mgrs",
-        "z": "2a306cb3a45f454c",
+        "z": "a3fd93de4e7ae70e",
         "name": "Convert Lat/Lon to MGRS",
         "precision": "5",
         "x": 250,
         "y": 160,
         "wires": [
             [
-                "d8c63fba8db7dfcb"
+                "d688cda22de864cd"
             ]
         ]
     },
     {
-        "id": "d8c63fba8db7dfcb",
+        "id": "0d865d2611a753d7",
         "type": "http response",
-        "z": "2a306cb3a45f454c",
+        "z": "a3fd93de4e7ae70e",
         "name": "Send HTTP Response",
         "statusCode": "",
         "headers": {},
-        "x": 240,
-        "y": 260,
+        "x": 380,
+        "y": 300,
         "wires": []
+    },
+    {
+        "id": "82667ca0149fd7fa",
+        "type": "http request",
+        "z": "a3fd93de4e7ae70e",
+        "name": "Lookup public IP address",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "wgetip.com",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 230,
+        "y": 420,
+        "wires": [
+            [
+                "85addfc99629a762"
+            ]
+        ]
+    },
+    {
+        "id": "85addfc99629a762",
+        "type": "template",
+        "z": "a3fd93de4e7ae70e",
+        "name": "Format GeoIP Lookup",
+        "field": "url",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "http://ip-api.com/json/{{payload}}",
+        "output": "str",
+        "x": 220,
+        "y": 460,
+        "wires": [
+            [
+                "e3287734798fa984"
+            ]
+        ]
+    },
+    {
+        "id": "e3287734798fa984",
+        "type": "http request",
+        "z": "a3fd93de4e7ae70e",
+        "name": "GeoIP Lookup",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 200,
+        "y": 500,
+        "wires": [
+            [
+                "b31b67dd7a2e49d6"
+            ]
+        ]
+    },
+    {
+        "id": "b31b67dd7a2e49d6",
+        "type": "change",
+        "z": "a3fd93de4e7ae70e",
+        "name": "Set Global Variables ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "regionName",
+                "pt": "global",
+                "to": "payload.regionName",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "countryCode",
+                "pt": "global",
+                "to": "payload.countryCode",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "org",
+                "pt": "global",
+                "to": "payload.org",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 540,
+        "wires": [
+            [
+                "e2d208276aa1f65a"
+            ]
+        ]
+    },
+    {
+        "id": "e2d208276aa1f65a",
+        "type": "template",
+        "z": "a3fd93de4e7ae70e",
+        "name": "Format iplocation file",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\"regionName\":\"{{payload.regionName}}\",\"countryCode\":\"{{payload.countryCode}}\",\"org\":\"{{payload.org}}\"}",
+        "output": "str",
+        "x": 220,
+        "y": 580,
+        "wires": [
+            [
+                "ce8c1031aaf316a6"
+            ]
+        ]
+    },
+    {
+        "id": "ce8c1031aaf316a6",
+        "type": "file",
+        "z": "a3fd93de4e7ae70e",
+        "name": "write iplocation file to disk ",
+        "filename": "/data/iplocation",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 230,
+        "y": 620,
+        "wires": [
+            [
+                "2dc26e56266d41f7"
+            ]
+        ]
+    },
+    {
+        "id": "52f26d13c88a3e75",
+        "type": "inject",
+        "z": "a3fd93de4e7ae70e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 360,
+        "wires": [
+            [
+                "82667ca0149fd7fa"
+            ]
+        ]
+    },
+    {
+        "id": "2dc26e56266d41f7",
+        "type": "debug",
+        "z": "a3fd93de4e7ae70e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "d688cda22de864cd",
+        "type": "template",
+        "z": "a3fd93de4e7ae70e",
+        "name": "Extract Geo and Org info from global variables",
+        "field": "payload.geo",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"publishregion\":\"{{global.regionName}}\",\"publishcountry\":\"{{global.countryCode}}\",\"publishorg\":\"{{global.org}}\"}",
+        "output": "json",
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "d834713a3c1d76c3"
+            ]
+        ]
+    },
+    {
+        "id": "cd6d3646f1351786",
+        "type": "function",
+        "z": "a3fd93de4e7ae70e",
+        "name": "Add Request Received Time",
+        "func": "msg.payload.requesttime = Date.now() \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "fc28f4f1929d20d5"
+            ]
+        ]
+    },
+    {
+        "id": "d834713a3c1d76c3",
+        "type": "function",
+        "z": "a3fd93de4e7ae70e",
+        "name": "Add Request Response Time",
+        "func": "msg.payload.responsetime = Date.now() \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 260,
+        "wires": [
+            [
+                "0d865d2611a753d7"
+            ]
+        ]
     }
 ]
