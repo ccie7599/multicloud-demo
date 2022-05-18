@@ -2,7 +2,15 @@
     {
         "id": "a3fd93de4e7ae70e",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Endpoint Application",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b9c85903b08ef4d9",
+        "type": "tab",
+        "label": "Test Application",
         "disabled": false,
         "info": "",
         "env": []
@@ -227,6 +235,25 @@
         "order": 1,
         "disabled": false,
         "hidden": false
+    },
+    {
+        "id": "099bdc34d8a658a7",
+        "type": "ui_tab",
+        "name": "Cloud Latency",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8087db79bf7b4a3f",
+        "type": "ui_group",
+        "name": "Cloud Latency ",
+        "tab": "099bdc34d8a658a7",
+        "order": 1,
+        "disp": true,
+        "width": "19",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "d554eade73674c15",
@@ -509,6 +536,284 @@
         "wires": [
             [
                 "0d865d2611a753d7"
+            ]
+        ]
+    },
+    {
+        "id": "919db54feb9aeddd",
+        "type": "inject",
+        "z": "b9c85903b08ef4d9",
+        "d": true,
+        "name": "Request every second",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "cf01461ece5d10ff",
+                "b5e0da01c5d96e47",
+                "3207256a5e6a43a3",
+                "26fcf91ee08b54f6"
+            ]
+        ]
+    },
+    {
+        "id": "cf01461ece5d10ff",
+        "type": "http request",
+        "z": "b9c85903b08ef4d9",
+        "name": "Performance GTM Endpoint",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://performance.apleytest.terraform.akadns.net:1880/location?lat=45&lon=-85",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 420,
+        "y": 100,
+        "wires": [
+            [
+                "300ba90ddc44f684"
+            ]
+        ]
+    },
+    {
+        "id": "b5e0da01c5d96e47",
+        "type": "http request",
+        "z": "b9c85903b08ef4d9",
+        "name": "Load Balanced GTM endpoint",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://loadbalance.apleytest.terraform.akadns.net:1880/location?lat=45&lon=-85",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "300ba90ddc44f684"
+            ]
+        ]
+    },
+    {
+        "id": "3207256a5e6a43a3",
+        "type": "http request",
+        "z": "b9c85903b08ef4d9",
+        "name": "Failover GTM Endpoint",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://failover.apleytest.terraform.akadns.net:1880/location?lat=45&lon=-85",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "300ba90ddc44f684"
+            ]
+        ]
+    },
+    {
+        "id": "26fcf91ee08b54f6",
+        "type": "http request",
+        "z": "b9c85903b08ef4d9",
+        "name": "Geo-Map GTM Endpoint",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://geomap.apleytest.terraform.akadns.net:1880/location?lat=45&lon=-85",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "300ba90ddc44f684"
+            ]
+        ]
+    },
+    {
+        "id": "300ba90ddc44f684",
+        "type": "function",
+        "z": "b9c85903b08ef4d9",
+        "name": "",
+        "func": "var now = Date.now();\nvar req = msg.payload.requesttime;\nvar res = msg.payload.responsetime;\nmsg.payload.processtime = res - req;\nmsg.payload.networkresponse = now - res;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "a26ed6894aeb7493",
+                "ed4406f774560466",
+                "7c1762839dde3e59"
+            ]
+        ]
+    },
+    {
+        "id": "ed4406f774560466",
+        "type": "debug",
+        "z": "b9c85903b08ef4d9",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "9008610e00a7b649",
+        "type": "ui_chart",
+        "z": "b9c85903b08ef4d9",
+        "name": "",
+        "group": "8087db79bf7b4a3f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Response Time in ms",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1040,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a26ed6894aeb7493",
+        "type": "template",
+        "z": "b9c85903b08ef4d9",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.geo.publishorg}}-processing time",
+        "output": "str",
+        "x": 680,
+        "y": 420,
+        "wires": [
+            [
+                "cf82a698eb6f6ed6"
+            ]
+        ]
+    },
+    {
+        "id": "cf82a698eb6f6ed6",
+        "type": "template",
+        "z": "b9c85903b08ef4d9",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.processtime}}",
+        "output": "str",
+        "x": 800,
+        "y": 500,
+        "wires": [
+            [
+                "9008610e00a7b649"
+            ]
+        ]
+    },
+    {
+        "id": "7634a5b7f01517a1",
+        "type": "template",
+        "z": "b9c85903b08ef4d9",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.networkresponse}}",
+        "output": "str",
+        "x": 900,
+        "y": 180,
+        "wires": [
+            [
+                "9008610e00a7b649"
+            ]
+        ]
+    },
+    {
+        "id": "7c1762839dde3e59",
+        "type": "template",
+        "z": "b9c85903b08ef4d9",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.geo.publishorg}}-network response time",
+        "output": "str",
+        "x": 780,
+        "y": 100,
+        "wires": [
+            [
+                "7634a5b7f01517a1"
             ]
         ]
     }
